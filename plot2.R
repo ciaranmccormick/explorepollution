@@ -9,4 +9,7 @@ library(data.table)
 DT <- data.table(Emissions=NEI$Emissions, fips=NEI$fips, year=NEI$year)
 NEI.baltimore <- DT[DT$fips=="24510",]
 NEI.baltimore.totals <- NEI.baltimore[,list(totalEmissions=sum(Emissions)), by='year']
-plot(NEI.baltimore.totals)
+
+png(file="plot2.png", width=480, height=480, units="px") # Open png device
+plot(NEI.baltimore.totals, type="l", main="PM2.5 emissions in Baltimore from 1999 to 2008")
+dev.off() # Close Device

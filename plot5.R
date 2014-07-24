@@ -8,7 +8,10 @@ motorCodes <- SCC$SCC[grep("vehicle", SCC$EI.Sector, ignore.case=TRUE)]
 
 NEI.vehicle <- subset(NEI, SCC %in% motorCodes)
 
-DT <- data.table(Emissions=NEI.vehicle$Emissions, year=NEI.vehicle$year)
+DT <- data.table(NEI.vehicle)
 NEI.baltimore <- DT[fips == "24510"]
 NEI.totals <- NEI.baltimore[,list(totalEmissions=sum(Emissions)), by='year']
-qplot(year, totalEmissions, data=NEI.totals)
+
+png(file="plot5.png", width=480, height=480, units="px") # Open png device
+qplot(year, totalEmissions, data=NEI.totals, geom="line")
+dev.off() # Close Device

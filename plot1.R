@@ -9,4 +9,7 @@ SCC <- readRDS("Source_Classification_Code.rds")
 library(data.table)
 DT <- data.table(Emissions=NEI$Emissions, year=NEI$year)
 NEI.totals <- DT[,list(totalEmissions=sum(Emissions)), by='year']
-plot(NEI.totals)
+
+png(file="plot1.png", width=480, height=480, units="px") # Open png device
+plot(NEI.totals, main="PM2.5 Emissions in the US from 1999 to 2008", type="l")
+dev.off() # Close Device

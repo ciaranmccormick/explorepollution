@@ -12,4 +12,8 @@ library(ggplot2)
 DT <- data.table(NEI)
 NEI.baltimore <- DT[fips == "24510"]
 NEI.baltimore.totals <- NEI.baltimore[,list(totalEmissions=sum(Emissions), type), by=c('year','type')]
-qplot(year, totalEmissions, data=NEI.baltimore.totals, colour=type, geom="line")
+
+png(file="plot3.png", width=480, height=480, units="px") # Open png device
+qplot(year, totalEmissions, data=NEI.baltimore.totals, colour=type, geom="line", main="Changes in different types of emissions in Baltimore 99-08")
+dev.off() # Close Device
+?qplot
